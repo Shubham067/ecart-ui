@@ -72,6 +72,8 @@ const ProductEdit = ({ params }) => {
   const [discount_price, setDiscountPrice] = useState(0);
   const [count_in_stock, setCountInStock] = useState(0);
   const [uploading, setUploading] = useState(false);
+  const [isFeature, setIsFeature] = useState(false);
+  const [currentFile, setCurrentFile] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -133,10 +135,12 @@ const ProductEdit = ({ params }) => {
   }, []);
 
   const uploadHandler = async (e) => {
-    const file = e.target.files[0];
+    const file = currentFile;
+    // console.log("file", file);
     const bodyFormData = new FormData();
     bodyFormData.append("image", file);
     bodyFormData.append("id", product.id);
+    bodyFormData.append("is_feature", isFeature);
 
     setUploading(true);
 
@@ -299,23 +303,49 @@ const ProductEdit = ({ params }) => {
                 onChange={(e) => setCountInStock(e.target.value)}
                 autoFocus
               />
-              <Button variant="contained" component="label">
-                Upload File
-                <input type="file" onChange={uploadHandler} hidden />
-              </Button>
-              {uploading && <CircularProgress />}
+              <label htmlFor="btn-upload">
+                <input
+                  id="btn-upload"
+                  name="btn-upload"
+                  style={{ display: "none" }}
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setCurrentFile(e.target.files[0])}
+                />
+                <Button variant="outlined" component="span" color="secondary">
+                  Choose Image
+                </Button>
+              </label>
 
-              {/* <FormControlLabel
-                label="Is Admin"
-                control={
-                  <Checkbox
-                    onClick={(e) => setIsAdmin(e.target.checked)}
-                    checked={isAdmin}
-                    name="isAdmin"
-                    color="primary"
-                  />
-                }
-              /> */}
+              <div className="file-name" style={{ wordWrap: "break-word" }}>
+                <br />
+                {currentFile ? (
+                  <Typography>{currentFile.name}</Typography>
+                ) : null}
+                <FormControlLabel
+                  label="Is Feature"
+                  control={
+                    <Checkbox
+                      onClick={(e) => setIsFeature(e.target.checked)}
+                      checked={isFeature}
+                      name="isFeature"
+                      color="primary"
+                      disabled={currentFile == null}
+                    />
+                  }
+                />
+                <br />
+                <Button
+                  variant="contained"
+                  component="label"
+                  color="secondary"
+                  onClick={uploadHandler}
+                  disabled={currentFile == null}
+                >
+                  Upload Image
+                </Button>
+                {uploading && <CircularProgress />}
+              </div>
 
               <Button
                 type="submit"
