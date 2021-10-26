@@ -133,7 +133,7 @@ const Product = ({ product, categories, error, loading, slug }) => {
   }, [dispatch, slug, successProductReview]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/accounts/csrf/", {
+    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/accounts/csrf/`, {
       credentials: "include",
     })
       .then((res) => {
@@ -553,7 +553,9 @@ export const getStaticProps = wrapper.getStaticProps(
       const { error, loading, product } = productDetails;
       // const products = await res.json();
 
-      const ress = await fetch("http://127.0.0.1:8000/api/categories");
+      const ress = await fetch(
+        `${process.env.NEXT_PUBLIC_API_HOST}/api/categories`
+      );
       const categories = await ress.json();
 
       return {

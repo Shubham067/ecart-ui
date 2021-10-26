@@ -56,7 +56,9 @@ const Cart = () => {
   useEffect(() => {
     async function getCategories() {
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/categories");
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_HOST}/api/categories`
+        );
         setCategories(await res.json());
       } catch (err) {
         console.log(err);
@@ -66,7 +68,9 @@ const Cart = () => {
   }, []);
 
   const updateCartHandler = async (item, qty) => {
-    const res = await fetch(`http://127.0.0.1:8000/api/products/${item.slug}`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/products/${item.slug}`
+    );
     const data = await res.json();
 
     if (data.count_in_stock < qty) {
@@ -241,7 +245,7 @@ const Cart = () => {
 
 //     const { cartItems } = cart;
 
-//     const ress = await fetch("http://127.0.0.1:8000/api/categories");
+//     const ress = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/categories`);
 //     const categories = await ress.json();
 
 //     return {

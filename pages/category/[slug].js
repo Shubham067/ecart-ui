@@ -139,11 +139,13 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const res = await fetch(
-    `http://127.0.0.1:8000/api/categories/${params.slug}`
+    `${process.env.NEXT_PUBLIC_API_HOST}/api/categories/${params.slug}`
   );
   const products = await res.json();
 
-  const ress = await fetch("http://127.0.0.1:8000/api/categories");
+  const ress = await fetch(
+    `${process.env.NEXT_PUBLIC_API_HOST}/api/categories`
+  );
   const categories = await ress.json();
 
   return {

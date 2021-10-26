@@ -32,16 +32,19 @@ export const login = (username, password, csrfToken) => async (dispatch) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST });
 
-    const res = await fetch("http://127.0.0.1:8000/api/accounts/login/", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "X-CSRFToken": csrfToken,
-      },
-      credentials: "include",
-      body: JSON.stringify({ username: username, password: password }),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/accounts/login/`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+        credentials: "include",
+        body: JSON.stringify({ username: username, password: password }),
+      }
+    );
 
     const data = await res.json();
 
@@ -80,20 +83,23 @@ export const register =
     try {
       dispatch({ type: USER_REGISTER_REQUEST });
 
-      const res = await fetch("http://127.0.0.1:8000/api/accounts/register/", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrfToken,
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          email: email,
-          username: username,
-          password: password,
-        }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_HOST}/api/accounts/register/`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            email: email,
+            username: username,
+            password: password,
+          }),
+        }
+      );
 
       const data = await res.json();
 
@@ -129,14 +135,17 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
 
-    const res = await fetch(`http://127.0.0.1:8000/api/accounts/user/${id}/`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.access}`,
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/accounts/user/${id}/`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.access}`,
+        },
+      }
+    );
 
     const data = await res.json();
 
@@ -165,7 +174,7 @@ export const updateUserDetails =
       } = getState();
 
       const res = await fetch(
-        "http://127.0.0.1:8000/api/accounts/user/profile/update/",
+        `${process.env.NEXT_PUBLIC_API_HOST}/api/accounts/user/profile/update/`,
         {
           method: "PUT",
           headers: {
@@ -216,14 +225,17 @@ export const getUserList = () => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
 
-    const res = await fetch("http://127.0.0.1:8000/api/accounts/users/", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.access}`,
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/accounts/users/`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.access}`,
+        },
+      }
+    );
 
     const data = await res.json();
 
@@ -251,7 +263,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     } = getState();
 
     const res = await fetch(
-      `http://127.0.0.1:8000/api/accounts/users/delete/${id}/`,
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/accounts/users/delete/${id}/`,
       {
         method: "DELETE",
         headers: {
@@ -288,7 +300,7 @@ export const updateUser = (user, csrfToken) => async (dispatch, getState) => {
     } = getState();
 
     const res = await fetch(
-      `http://127.0.0.1:8000/api/accounts/users/update/${user.id}/`,
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/accounts/users/update/${user.id}/`,
       {
         method: "PUT",
         headers: {

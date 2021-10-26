@@ -102,7 +102,9 @@ const PlaceOrder = () => {
   useEffect(() => {
     async function getCategories() {
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/categories");
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_HOST}/api/categories`
+        );
         setCategories(await res.json());
       } catch (err) {
         console.log(err);
@@ -112,7 +114,7 @@ const PlaceOrder = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/accounts/csrf/", {
+    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/accounts/csrf/`, {
       credentials: "include",
     })
       .then((res) => {

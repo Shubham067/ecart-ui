@@ -96,7 +96,9 @@ const Home = () => {
   useEffect(() => {
     async function getCategories() {
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/categories");
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_HOST}/api/categories`
+        );
         setCategories(await res.json());
       } catch (err) {
         console.log(err);
@@ -289,7 +291,7 @@ const Home = () => {
 //   const { error, loading, products } = productList;
 //   // const products = await res.json();
 
-//   const ress = await fetch("http://127.0.0.1:8000/api/categories");
+//   const ress = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/categories`);
 //   const categories = await ress.json();
 
 //   return {

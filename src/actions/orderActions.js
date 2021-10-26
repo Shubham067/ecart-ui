@@ -34,17 +34,20 @@ export const createOrder = (order, csrfToken) => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
 
-    const res = await fetch("http://127.0.0.1:8000/api/orders/add/", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.access}`,
-        "X-CSRFToken": csrfToken,
-      },
-      credentials: "include",
-      body: JSON.stringify(order),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/orders/add/`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.access}`,
+          "X-CSRFToken": csrfToken,
+        },
+        credentials: "include",
+        body: JSON.stringify(order),
+      }
+    );
 
     const data = await res.json();
 
@@ -80,14 +83,17 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
 
-    const res = await fetch(`http://127.0.0.1:8000/api/orders/${id}/`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.access}`,
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/orders/${id}/`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.access}`,
+        },
+      }
+    );
 
     const data = await res.json();
 
@@ -115,17 +121,20 @@ export const payOrder =
         userLogin: { userInfo },
       } = getState();
 
-      const res = await fetch(`http://127.0.0.1:8000/api/orders/${id}/pay/`, {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${userInfo.access}`,
-          "X-CSRFToken": csrfToken,
-        },
-        credentials: "include",
-        body: JSON.stringify(paymentResult),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_HOST}/api/orders/${id}/pay/`,
+        {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userInfo.access}`,
+            "X-CSRFToken": csrfToken,
+          },
+          credentials: "include",
+          body: JSON.stringify(paymentResult),
+        }
+      );
 
       const data = await res.json();
 
@@ -154,7 +163,7 @@ export const deliverOrder =
       } = getState();
 
       const res = await fetch(
-        `http://127.0.0.1:8000/api/orders/${order.id}/deliver/`,
+        `${process.env.NEXT_PUBLIC_API_HOST}/api/orders/${order.id}/deliver/`,
         {
           method: "PUT",
           headers: {
@@ -193,14 +202,17 @@ export const getOrderHistory = () => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
 
-    const res = await fetch(`http://127.0.0.1:8000/api/orders/history/`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.access}`,
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/orders/history/`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.access}`,
+        },
+      }
+    );
 
     const data = await res.json();
 
@@ -227,7 +239,7 @@ export const listOrders = () => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
 
-    const res = await fetch(`http://127.0.0.1:8000/api/orders/`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/orders/`, {
       method: "GET",
       headers: {
         Accept: "application/json",

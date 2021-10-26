@@ -10,7 +10,7 @@ export const Dashboard = () => {
     if (route.isReady) {
       console.log("query--", route.query.jwt);
 
-      fetch("http://localhost:8000/api/accounts/whoami/", {
+      fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/accounts/whoami/`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + route.query.jwt,

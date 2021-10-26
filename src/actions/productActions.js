@@ -29,7 +29,7 @@ export const listProducts = (page) => async (dispatch) => {
     dispatch({ type: PRODUCT_LIST_REQUEST });
 
     const data = await fetch(
-      `http://127.0.0.1:8000/api/products/?page=${page}`
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/products/?page=${page}`
     );
 
     dispatch({
@@ -51,7 +51,9 @@ export const listTopRatedProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_TOP_REQUEST });
 
-    const data = await fetch(`http://127.0.0.1:8000/api/products/top/`);
+    const data = await fetch(
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/products/top/`
+    );
 
     dispatch({
       type: PRODUCT_TOP_SUCCESS,
@@ -72,7 +74,9 @@ export const listProductDetails = (slug) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
-    const data = await fetch(`http://127.0.0.1:8000/api/products/${slug}/`);
+    const data = await fetch(
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/products/${slug}/`
+    );
 
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
@@ -98,7 +102,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
     } = getState();
 
     const res = await fetch(
-      `http://127.0.0.1:8000/api/products/delete/${id}/`,
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/products/delete/${id}/`,
       {
         method: "DELETE",
         headers: {
@@ -134,17 +138,20 @@ export const createProduct = (csrfToken) => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
 
-    const res = await fetch("http://127.0.0.1:8000/api/products/create/", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.access}`,
-        "X-CSRFToken": csrfToken,
-      },
-      credentials: "include",
-      body: JSON.stringify({}),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/products/create/`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.access}`,
+          "X-CSRFToken": csrfToken,
+        },
+        credentials: "include",
+        body: JSON.stringify({}),
+      }
+    );
 
     const data = await res.json();
 
@@ -173,7 +180,7 @@ export const updateProduct =
       } = getState();
 
       const res = await fetch(
-        `http://127.0.0.1:8000/api/products/update/${product.id}/`,
+        `${process.env.NEXT_PUBLIC_API_HOST}/api/products/update/${product.id}/`,
         {
           method: "PUT",
           headers: {
@@ -219,7 +226,7 @@ export const createProductReview =
       } = getState();
 
       const res = await fetch(
-        `http://127.0.0.1:8000/api/products/${productId}/reviews/`,
+        `${process.env.NEXT_PUBLIC_API_HOST}/api/products/${productId}/reviews/`,
         {
           method: "POST",
           headers: {

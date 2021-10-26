@@ -7,7 +7,9 @@ import {
 
 export const addToCart = (slug, qty) => async (dispatch, getState) => {
   try {
-    const res = await fetch(`http://127.0.0.1:8000/api/products/${slug}`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_HOST}/api/products/${slug}`
+    );
     const data = await res.json();
 
     dispatch({
