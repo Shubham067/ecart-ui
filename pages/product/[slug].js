@@ -566,6 +566,7 @@ export const getStaticProps = wrapper.getStaticProps(
           loading,
           slug: params.slug,
         },
+        revalidate: 60,
       };
     }
 );
