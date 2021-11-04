@@ -142,7 +142,7 @@ const ProductEdit = ({ params }) => {
     const bodyFormData = new FormData();
     bodyFormData.append("image", file);
     bodyFormData.append("id", product.id);
-    bodyFormData.append("is_feature", isFeature);
+    bodyFormData.append("is_feature", isFeature.toString());
 
     setUploading(true);
 
