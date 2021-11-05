@@ -56,10 +56,10 @@ const useStyles = makeStyles((theme) => ({
   image: {
     display: "flex",
     height: "300px",
-    // width: "400px",
+    width: "320px",
     padding: "0px",
     margin: "10px",
-    borderRadius: "50%",
+    borderRadius: "10%",
     marginLeft: "auto",
     marginRight: "auto",
     backgroundColor: "white",
