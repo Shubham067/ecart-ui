@@ -74,6 +74,7 @@ const ProductEdit = ({ params }) => {
   const [uploading, setUploading] = useState(false);
   const [isFeature, setIsFeature] = useState(false);
   const [currentFile, setCurrentFile] = useState(null);
+  const [imageUploadDetail, setImageUploadDetail] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -138,7 +139,7 @@ const ProductEdit = ({ params }) => {
 
   const uploadHandler = async (e) => {
     const file = currentFile;
-    // console.log("file", file);
+
     const bodyFormData = new FormData();
     bodyFormData.append("image", file);
     bodyFormData.append("id", product.id);
@@ -162,10 +163,12 @@ const ProductEdit = ({ params }) => {
       );
 
       const data = await res.json();
-      // console.log("data", data);
+
       setUploading(false);
+      setImageUploadDetail(data.detail);
     } catch (error) {
       setUploading(false);
+      setImageUploadDetail(error.message);
     }
   };
 
@@ -326,6 +329,10 @@ const ProductEdit = ({ params }) => {
                 <br />
                 {currentFile ? (
                   <Typography>{currentFile.name}</Typography>
+                ) : null}
+                <br />
+                {imageUploadDetail ? (
+                  <Typography>{imageUploadDetail}</Typography>
                 ) : null}
                 <FormControlLabel
                   label="Is Feature"
