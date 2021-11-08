@@ -32,6 +32,8 @@ import {
   orderDeliverReducer,
 } from "./reducers/orderReducers";
 
+import { fetchSummaryReducer } from "./reducers/dashboardReducers";
+
 const reducer = combineReducers({
   productList: ProductListReducer,
   productDetails: ProductDetailsReducer,
@@ -54,6 +56,7 @@ const reducer = combineReducers({
   orderDeliver: orderDeliverReducer,
   orderHistory: orderHistoryReducer,
   orderList: orderListReducer,
+  fetchSummary: fetchSummaryReducer,
 });
 
 var initialState = {};
