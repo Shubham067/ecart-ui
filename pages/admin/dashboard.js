@@ -101,14 +101,18 @@ const AdminDashboard = () => {
                   <Grid container spacing={5} align="center">
                     <Grid item md={3}>
                       <Card raised>
-                        <CardContent>
+                        <CardContent style={{ backgroundColor: "#fbc02d" }}>
                           <Typography variant="h3">
                             ₹{summary.ordersPrice}
                           </Typography>
                           <Typography>Sales</Typography>
                         </CardContent>
                         <div
-                          style={{ display: "flex", justifyContent: "center" }}
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            backgroundColor: "#f57f17",
+                          }}
                         >
                           <CardActions>
                             <NextLink
@@ -130,14 +134,18 @@ const AdminDashboard = () => {
                     </Grid>
                     <Grid item md={3}>
                       <Card raised>
-                        <CardContent>
+                        <CardContent style={{ backgroundColor: "#c0ca33" }}>
                           <Typography variant="h3">
                             {summary.ordersCount}
                           </Typography>
                           <Typography>Orders</Typography>
                         </CardContent>
                         <div
-                          style={{ display: "flex", justifyContent: "center" }}
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            backgroundColor: "#9e9d24",
+                          }}
                         >
                           <CardActions>
                             <NextLink href="/admin/orders" passHref>
@@ -155,14 +163,18 @@ const AdminDashboard = () => {
                     </Grid>
                     <Grid item md={3}>
                       <Card raised>
-                        <CardContent>
+                        <CardContent style={{ backgroundColor: "#7cb342" }}>
                           <Typography variant="h3">
                             {summary.productsCount}
                           </Typography>
                           <Typography>Products</Typography>
                         </CardContent>
                         <div
-                          style={{ display: "flex", justifyContent: "center" }}
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            backgroundColor: "#558b2f",
+                          }}
                         >
                           <CardActions>
                             <NextLink href="/admin/products" passHref>
@@ -180,14 +192,18 @@ const AdminDashboard = () => {
                     </Grid>
                     <Grid item md={3}>
                       <Card raised>
-                        <CardContent>
+                        <CardContent style={{ backgroundColor: "#ab47bc" }}>
                           <Typography variant="h3">
                             {summary.usersCount}
                           </Typography>
                           <Typography>Users</Typography>
                         </CardContent>
                         <div
-                          style={{ display: "flex", justifyContent: "center" }}
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            backgroundColor: "#8e24aa",
+                          }}
                         >
                           <CardActions>
                             <NextLink href="/admin/users" passHref>
